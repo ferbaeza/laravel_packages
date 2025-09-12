@@ -1,0 +1,24 @@
+{
+    "name": "vendor/my-package",
+    "description": "Mi librería personalizada",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Vendor\\MyPackage\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vendor\\MyPackage\\MyPackageServiceProvider"
+            ]
+        }
+    }
+}
