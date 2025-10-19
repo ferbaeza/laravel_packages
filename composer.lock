@@ -4,39 +4,74 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d26fcdef536d514d9168ebbcf6948695",
+    "content-hash": "d5c54ccaa4abde08fb6b7b12a0da82f3",
     "packages": [
         {
-            "name": "baezeta/parser",
+            "name": "baezeta/laravel-kernel",
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "./packages/baezeta-parser",
-                "reference": "c2c4cbb73c64a07151e44270ecd28af180ad75c8"
+                "url": "./packages/laravel-kernel",
+                "reference": "0dfb77cfbbb04bde57ba9c6662e771a658468ba5"
             },
             "require": {
-                "php": "^8.2"
+                "ramsey/uuid": "^4.7"
             },
             "require-dev": {
-                "phpunit/phpunit": "^11.0"
+                "friendsofphp/php-cs-fixer": "^3.57",
+                "illuminate/support": "^11.8",
+                "phpstan/phpstan": "^1.11",
+                "phpunit/phpunit": "^11.1",
+                "symfony/var-dumper": "^7.0"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Baezeta\\Parser\\ParserServiceProvider"
+                        "Baezeta\\Kernel\\KernelServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Baezeta\\Parser\\": "src/"
+                    "Baezeta\\Kernel\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Baezeta\\Test\\": "tests/"
                 }
+            },
+            "scripts": {
+                "auto": [
+                    "composer dump-autoload -o"
+                ],
+                "tests": [
+                    "phpunit --color=always --testdox tests/"
+                ],
+                "stan": [
+                    "vendor/bin/phpstan analyse src --level 5"
+                ],
+                "fixer": [
+                    "php ./vendor/bin/php-cs-fixer fix src/ --diff"
+                ],
+                "fixer-test": [
+                    "php ./vendor/bin/php-cs-fixer fix tests/ --diff"
+                ]
             },
             "license": [
                 "MIT"
             ],
-            "description": "Librería de parsing personalizada",
+            "authors": [
+                {
+                    "name": "Fernando Baeza",
+                    "email": "fbaezahurato@gmail.com"
+                }
+            ],
+            "description": "Kernel Laravel para el uso de clases como Bus, Criteria, Entidades, Repositorios, Servicios, etc.",
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -8409,7 +8444,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "baezeta/parser": 20
+        "baezeta/laravel-kernel": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
