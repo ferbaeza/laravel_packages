@@ -1,0 +1,3 @@
+[submodule "packages/laravel-kernel"]
+	path = packages/laravel-kernel
+	url = https://gitlab.com/Baezeta/laravel-kernel.git
