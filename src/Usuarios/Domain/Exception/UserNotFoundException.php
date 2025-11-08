@@ -1,6 +1,6 @@
 <?php
 
-namespace Devpack\src\Usuarios\Domain\Exception;
+namespace Devpack\Usuarios\Domain\Exception;
 
 use Exception;
 

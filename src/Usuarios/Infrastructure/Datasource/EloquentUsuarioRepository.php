@@ -1,10 +1,10 @@
 <?php
 
-namespace Devpack\src\Usuarios\Infrastructure\Datasource;
+namespace Devpack\Usuarios\Infrastructure\Datasource;
 
 use App\Models\User;
-use Devpack\src\Usuarios\Domain\Entity\Usuario;
-use Devpack\src\Usuarios\Domain\Interfaces\UsuarioRepositoryInterface;
+use Devpack\Usuarios\Domain\Entity\Usuario;
+use Devpack\Usuarios\Domain\Interfaces\UsuarioRepositoryInterface;
 
 class EloquentUsuarioRepository implements UsuarioRepositoryInterface
 {

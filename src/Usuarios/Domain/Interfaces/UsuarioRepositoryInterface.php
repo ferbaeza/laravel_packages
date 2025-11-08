@@ -1,8 +1,8 @@
 <?php
 
-namespace Devpack\src\Usuarios\Domain\Interfaces;
+namespace Devpack\Usuarios\Domain\Interfaces;
 
-use Devpack\src\Usuarios\Domain\Entity\Usuario;
+use Devpack\Usuarios\Domain\Entity\Usuario;
 
 interface UsuarioRepositoryInterface
 {

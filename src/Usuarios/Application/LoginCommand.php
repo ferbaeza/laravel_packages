@@ -1,6 +1,6 @@
 <?php
 
-namespace Devpack\src\Usuarios\Application;
+namespace Devpack\Usuarios\Application;
 
 class LoginCommand
 {

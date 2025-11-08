@@ -1,12 +1,12 @@
 <?php
 
-namespace Devpack\src\Usuarios\Infrastructure\Http;
+namespace Devpack\Usuarios\Infrastructure\Http;
 
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Devpack\src\Usuarios\Application\LoginCommand;
-use Devpack\src\Usuarios\Application\LoginCommandHandler;
-use Devpack\src\Usuarios\Infrastructure\Http\Requests\LoginRequest;
+use Devpack\Usuarios\Application\LoginCommand;
+use Devpack\Usuarios\Application\LoginCommandHandler;
+use Devpack\Usuarios\Infrastructure\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {

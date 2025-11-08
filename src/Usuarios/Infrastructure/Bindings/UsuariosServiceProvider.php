@@ -1,12 +1,12 @@
 <?php
 
-namespace Devpack\src\Usuarios\Infrastructure\Bindings;
+namespace Devpack\Usuarios\Infrastructure\Bindings;
 
 use Illuminate\Support\ServiceProvider;
-use Devpack\src\Usuarios\Domain\Interfaces\UsuarioRepositoryInterface;
-use Devpack\src\Usuarios\Infrastructure\Datasource\EloquentUsuarioRepository;
-use Devpack\src\Usuarios\Domain\Services\LoginService;
-use Devpack\src\Usuarios\Application\LoginCommandHandler;
+use Devpack\Usuarios\Domain\Interfaces\UsuarioRepositoryInterface;
+use Devpack\Usuarios\Infrastructure\Datasource\EloquentUsuarioRepository;
+use Devpack\Usuarios\Domain\Services\LoginService;
+use Devpack\Usuarios\Application\LoginCommandHandler;
 
 class UsuariosServiceProvider extends ServiceProvider
 {

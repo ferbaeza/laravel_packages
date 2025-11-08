@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d4d258bfe720e6458487c4a1073827c",
+    "content-hash": "d5c54ccaa4abde08fb6b7b12a0da82f3",
     "packages": [
         {
             "name": "baezeta/laravel-kernel",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
                 "url": "./packages/laravel-kernel",
-                "reference": "0dfb77cfbbb04bde57ba9c6662e771a658468ba5"
+                "reference": "c064fba229f7a5c0867b71761a8590168582b744"
             },
             "require": {
                 "ramsey/uuid": "^4.7"
@@ -72,7 +72,10 @@
                 }
             ],
             "description": "Kernel Laravel para el uso de clases como Bus, Criteria, Entidades, Repositorios, Servicios, etc.",
-            "time": "2025-10-19T14:01:35+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "brick/math",
@@ -8440,7 +8443,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "baezeta/laravel-kernel": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

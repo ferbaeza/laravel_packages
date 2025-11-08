@@ -1,8 +1,8 @@
 <?php
 
-namespace Devpack\src\Usuarios\Application;
+namespace Devpack\Usuarios\Application;
 
-use Devpack\src\Usuarios\Domain\Entity\Usuario;
+use Devpack\Usuarios\Domain\Entity\Usuario;
 
 class LoginResult
 {

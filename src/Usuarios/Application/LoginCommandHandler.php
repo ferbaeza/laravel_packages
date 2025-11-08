@@ -1,10 +1,10 @@
 <?php
 
-namespace Devpack\src\Usuarios\Application;
+namespace Devpack\Usuarios\Application;
 
-use Devpack\src\Usuarios\Domain\Services\LoginService;
-use Devpack\src\Usuarios\Domain\Exception\UserNotFoundException;
-use Devpack\src\Usuarios\Domain\Exception\InvalidCredentialsException;
+use Devpack\Usuarios\Domain\Services\LoginService;
+use Devpack\Usuarios\Domain\Exception\UserNotFoundException;
+use Devpack\Usuarios\Domain\Exception\InvalidCredentialsException;
 
 class LoginCommandHandler
 {

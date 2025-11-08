@@ -1,6 +1,6 @@
 <?php
 
-namespace Devpack\src\Usuarios\Infrastructure\Http\Requests;
+namespace Devpack\Usuarios\Infrastructure\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

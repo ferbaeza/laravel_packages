@@ -1,11 +1,11 @@
 <?php
 
-namespace Devpack\src\Usuarios\Domain\Services;
+namespace Devpack\Usuarios\Domain\Services;
 
-use Devpack\src\Usuarios\Domain\Entity\Usuario;
-use Devpack\src\Usuarios\Domain\Interfaces\UsuarioRepositoryInterface;
-use Devpack\src\Usuarios\Domain\Exception\InvalidCredentialsException;
-use Devpack\src\Usuarios\Domain\Exception\UserNotFoundException;
+use Devpack\Usuarios\Domain\Entity\Usuario;
+use Devpack\Usuarios\Domain\Interfaces\UsuarioRepositoryInterface;
+use Devpack\Usuarios\Domain\Exception\InvalidCredentialsException;
+use Devpack\Usuarios\Domain\Exception\UserNotFoundException;
 
 class LoginService
 {

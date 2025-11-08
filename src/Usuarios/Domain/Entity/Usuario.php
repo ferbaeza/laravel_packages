@@ -1,6 +1,6 @@
 <?php
 
-namespace Devpack\src\Usuarios\Domain\Entity;
+namespace Devpack\Usuarios\Domain\Entity;
 
 class Usuario
 {
