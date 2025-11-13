@@ -2,15 +2,22 @@
 
 namespace Devpack\Usuarios\Domain\Entity;
 
-class Usuario
+use Baezeta\Kernel\Entity\BaseKernelEntity;
+use Baezeta\Kernel\ValueObjects\Fecha\FechaValue;
+
+class Usuario extends BaseKernelEntity
 {
     public function __construct(
         private int $id,
         private string $name,
         private string $email,
-        private string $password,
-        private ?\DateTimeInterface $emailVerifiedAt = null
+        private ?FechaValue $emailVerifiedAt = null
     ) {
+    }
+
+    public function toArray(): array
+    {
+        return $this->getAttributes();
     }
 
     public function getId(): int
@@ -28,11 +35,6 @@ class Usuario
         return $this->email;
     }
 
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
     public function getEmailVerifiedAt(): ?\DateTimeInterface
     {
         return $this->emailVerifiedAt;
@@ -41,10 +43,5 @@ class Usuario
     public function isEmailVerified(): bool
     {
         return $this->emailVerifiedAt !== null;
-    }
-
-    public function verifyPassword(string $password): bool
-    {
-        return password_verify($password, $this->password);
     }
 }

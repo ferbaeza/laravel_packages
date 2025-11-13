@@ -1,16 +1,22 @@
 <?php
 
-namespace Devpack\Usuarios\Application;
+namespace Devpack\Usuarios\Domain\Response;
 
+use Baezeta\Kernel\Entity\BaseKernelEntity;
 use Devpack\Usuarios\Domain\Entity\Usuario;
 
-class LoginResult
+class LoginResponse extends BaseKernelEntity
 {
     public function __construct(
         private bool $success,
         private ?Usuario $usuario = null,
         private ?string $errorMessage = null
     ) {
+    }
+
+    public function toArray(): array
+    {
+        return $this->getAttributes();
     }
 
     public function isSuccess(): bool

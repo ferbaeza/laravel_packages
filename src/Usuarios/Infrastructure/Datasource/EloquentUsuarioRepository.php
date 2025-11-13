@@ -3,41 +3,37 @@
 namespace Devpack\Usuarios\Infrastructure\Datasource;
 
 use App\Models\User;
+use Baezeta\Kernel\Criteria\Criteria;
+use Baezeta\Kernel\Hydrator\Hydrator;
 use Devpack\Usuarios\Domain\Entity\Usuario;
+use Baezeta\Kernel\Laravel\Repository\BaseRepository;
+use Devpack\Usuarios\Domain\Collection\UsuariosCollection;
 use Devpack\Usuarios\Domain\Interfaces\UsuarioRepositoryInterface;
+use Devpack\Usuarios\Domain\Exception\UsuarioNoEncontradoException;
 
-class EloquentUsuarioRepository implements UsuarioRepositoryInterface
+class EloquentUsuarioRepository extends BaseRepository implements UsuarioRepositoryInterface
 {
-    public function findByEmail(string $email): ?Usuario
+    public function model(): string
     {
-        $user = User::where('email', $email)->first();
-
-        if ($user === null) {
-            return null;
-        }
-
-        return $this->mapToEntity($user);
+        return User::class;
     }
 
-    public function findById(int $id): ?Usuario
+    public function getEntity(Criteria $criteria): ?Usuario
     {
-        $user = User::find($id);
+        $user = $this->getModelEntity($criteria);
 
-        if ($user === null) {
-            return null;
+        if (!$user) {
+            throw new UsuarioNoEncontradoException();
         }
-
-        return $this->mapToEntity($user);
+        return Hydrator::hydrate(Usuario::class, $user->toArray());
     }
 
-    private function mapToEntity(User $user): Usuario
+    public function getCollection(Criteria $criteria): UsuariosCollection
     {
-        return new Usuario(
-            id: $user->id,
-            name: $user->name,
-            email: $user->email,
-            password: $user->password,
-            emailVerifiedAt: $user->email_verified_at
-        );
+        $model = $this->getModelCollection($criteria);
+        if (!$model) {
+            return new UsuariosCollection();
+        }
+        return Hydrator::hydrate(UsuariosCollection::class, $model->toArray());
     }
 }

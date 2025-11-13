@@ -2,11 +2,16 @@
 
 namespace Devpack\Usuarios\Application;
 
-class LoginCommand
+
+use Baezeta\Kernel\ValueObjects\Email\EmailValue;
+use Baezeta\Kernel\ValueObjects\Strings\StringValue;
+use Baezeta\Kernel\CommandQueryBus\Base\Domain\CommandBase;
+
+final readonly class LoginCommand extends CommandBase
 {
     public function __construct(
-        public readonly string $email,
-        public readonly string $password
+        public EmailValue $email,
+        public StringValue $password
     ) {
     }
 }

@@ -3,8 +3,8 @@
 namespace Devpack\Usuarios\Application;
 
 use Devpack\Usuarios\Domain\Services\LoginService;
-use Devpack\Usuarios\Domain\Exception\UserNotFoundException;
-use Devpack\Usuarios\Domain\Exception\InvalidCredentialsException;
+use Devpack\Usuarios\Domain\Response\LoginResponse;
+use Devpack\Usuarios\Domain\Exception\UsuarioNoEncontradoException;
 
 class LoginCommandHandler
 {
@@ -17,23 +17,22 @@ class LoginCommandHandler
      * Maneja el comando de login
      * 
      * @param LoginCommand $command
-     * @return LoginResult
+     * @return LoginResponse
      */
-    public function handle(LoginCommand $command): LoginResult
+    public function handle(LoginCommand $command): LoginResponse
     {
+        
         try {
             $usuario = $this->loginService->authenticate(
                 $command->email,
                 $command->password
             );
+    
+            return LoginResponse::success($usuario);
 
-            return LoginResult::success($usuario);
-        } catch (UserNotFoundException $e) {
-            return LoginResult::failure('Usuario no encontrado con el email proporcionado');
-        } catch (InvalidCredentialsException $e) {
-            return LoginResult::failure($e->getMessage());
-        } catch (\Exception $e) {
-            return LoginResult::failure('Error interno del servidor');
+        } catch (UsuarioNoEncontradoException $e) {
+            return LoginResponse::failure('Usuario no encontrado');
         }
+
     }
 }

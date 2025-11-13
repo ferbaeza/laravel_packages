@@ -2,10 +2,14 @@
 
 namespace Devpack\Usuarios\Domain\Services;
 
+use Illuminate\Support\Facades\Auth;
+use Baezeta\Kernel\Criteria\Criteria;
 use Devpack\Usuarios\Domain\Entity\Usuario;
-use Devpack\Usuarios\Domain\Interfaces\UsuarioRepositoryInterface;
+use Baezeta\Kernel\ValueObjects\Email\EmailValue;
+use Baezeta\Kernel\ValueObjects\Strings\StringValue;
 use Devpack\Usuarios\Domain\Exception\InvalidCredentialsException;
-use Devpack\Usuarios\Domain\Exception\UserNotFoundException;
+use Devpack\Usuarios\Domain\Interfaces\UsuarioRepositoryInterface;
+use Devpack\Usuarios\Domain\Exception\UsuarioNoEncontradoException;
 
 class LoginService
 {
@@ -17,53 +21,19 @@ class LoginService
     /**
      * Autentica un usuario con email y contraseña
      * 
-     * @param string $email
-     * @param string $password
+     * @param EmailValue $email
+     * @param StringValue $password
      * @return Usuario
-     * @throws UserNotFoundException
+     * @throws UsuarioNoEncontradoException
      * @throws InvalidCredentialsException
      */
-    public function authenticate(string $email, string $password): Usuario
+    public function authenticate(EmailValue $email, StringValue $password, bool $recordar = false): Usuario
     {
-        // Validar formato de email
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidCredentialsException('El formato del email no es válido');
+        if (Auth::attempt(['email' => $email->value(), 'password' => $password->value()], $recordar)) {
+
+            $criteria = (new Criteria())->where('email', $email->value());
+            return $this->usuarioRepository->getEntity($criteria);
         }
-
-        // Validar que la contraseña no esté vacía
-        if (empty(trim($password))) {
-            throw new InvalidCredentialsException('La contraseña no puede estar vacía');
-        }
-
-        // Buscar usuario por email
-        $usuario = $this->usuarioRepository->findByEmail($email);
-
-        if ($usuario === null) {
-            throw new UserNotFoundException($email);
-        }
-
-        // Verificar contraseña
-        if (!$usuario->verifyPassword($password)) {
-            throw new InvalidCredentialsException('La contraseña proporcionada es incorrecta');
-        }
-
-        return $usuario;
-    }
-
-    /**
-     * Verifica si las credenciales son válidas sin lanzar excepciones
-     * 
-     * @param string $email
-     * @param string $password
-     * @return bool
-     */
-    public function isValidCredentials(string $email, string $password): bool
-    {
-        try {
-            $this->authenticate($email, $password);
-            return true;
-        } catch (UserNotFoundException|InvalidCredentialsException) {
-            return false;
-        }
+        throw new InvalidCredentialsException();
     }
 }
